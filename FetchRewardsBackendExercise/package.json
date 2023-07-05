@@ -1,0 +1,21 @@
+{
+  "name": "fetch-rewards-backend-exercise",
+  "version": "0.0.0",
+  "description": "FetchRewardsBackendExercise",
+  "main": "app.js",
+  "author": {
+    "name": "Neel Bhattacharyya"
+  },
+  "engines": {
+    "node": "^10.0.0",
+    "npm": "^6.0.0"
+  },
+  "dependencies": {
+    "express": "4.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0"
+  },
+  "eslintConfig": {
+  }
+}
