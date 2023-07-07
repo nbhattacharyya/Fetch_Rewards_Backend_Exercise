@@ -8,7 +8,7 @@ app.use('/receipts/process', processReceiptRoute);
 app.use('/receipts/:id/points', processReceiptRoute);
 
 app.get('/', (req, res) => {
-    res.send('Hello!')
+    res.send('Server started succesfully!')
 });
 
 app.listen(PORT, () => console.log(`Server running on port: http://localhost:${PORT}`));
