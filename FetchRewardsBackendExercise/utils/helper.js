@@ -1,7 +1,13 @@
 const charSet = '0123456789abcdefghijklmnopqrstuvwxyz';
 
 const namePoints = (retailer) => {
-    return (retailer.length);
+    let count = 0;
+    for (let char of retailer) {
+        if (char.match(/^[0-9a-zA-Z]+$/)) {
+            count += 1;
+        }
+    }
+    return count;
 };
 exports.namePoints = namePoints;
 
@@ -31,8 +37,14 @@ exports.dayPurchasePoints = (purchaseDate) => {
 }
 
 exports.purchaseTimePoints = (purchaseTime) => {
-    let hour = purchaseTime.split(':')[0];
-    if (hour > 14 && hour < 16) {
+    var twoPm = new Date();
+    var fourPm = new Date();
+    twoPm.setHours(14, 0);
+    fourPm.setHours(16, 0);
+    var purchaseTimeConverted = new Date();
+    let parts = purchaseTime.split(':');
+    purchaseTimeConverted.setHours(parts[0], parts[1]);
+    if (purchaseTimeConverted.getTime() > twoPm.getTime() && purchaseTimeConverted.getTime() < fourPm.getTime()) {
         return 10;
     }
     return 0;
