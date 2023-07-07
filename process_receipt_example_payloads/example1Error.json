@@ -20,5 +20,6 @@
       "price": "2.25"
     }
   ],
-  "total": "9.00"
+  "total": "9.00",
+  "TestingExtraParameter":  "Additional Param"
 }

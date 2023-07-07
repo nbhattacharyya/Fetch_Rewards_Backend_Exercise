@@ -6,22 +6,27 @@ of different guidelines that are outlined in the exercise instructions.
 * [Node](https://nodejs.org/en)
 * [Express](https://expressjs.com/)
 * [Express-Validator](https://www.npmjs.com/package/express-validator)
+* [Chai](https://www.chaijs.com/)
+* [Chai-http](https://www.chaijs.com/plugins/chai-http/)
+* [Mocha](https://mochajs.org/)
 
 ## Setup
 * Node Version 10.0.0 or higher must be installed. If you do not have Node installed, please download from the link in the Dependencies section.
   You can check the version of node you have locally by running:
-	```node --version```
+	```
+	node --version
+	```
 * Clone repository:
 	```
 	git clone https://github.com/nbhattacharyya/Fetch_Rewards_Backend_Exercise.git
 	```
-* Install dependencies:
+* Install dependencies (npm, the Node Package Manager, comes with the installation of Node):
 	```
 	npm i
 	```
 * Starting the service:
 	```
-	node app.js
+	npm start
 	```
 Succesful starting of the server should be indicated by the following in terminal:
 	```
@@ -39,4 +44,10 @@ You can validate further by putting the url in your browser and seeing the follo
 >![Post_Request_One](/postman_images/post_request_one.png)
 
 >![Get_Request_One](/postman_images/get_request_one.png)
+
+## Unit Tests
+You can run the unit tests with the following command:
+```
+npm test
+```
 

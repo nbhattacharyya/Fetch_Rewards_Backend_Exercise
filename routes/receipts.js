@@ -4,17 +4,17 @@ const helperFunctions = require('../utils/helper.js');
 const express = require('express');
 const router = express.Router();
 
-// Map to gold key:value pair of id:points
+// Map to hold key:value pair of id:points
 const receiptsPointsMap = {};
 
 // Post request for '/receipts/process'
 router.post('/', [
     // Reqeust body validations and error handling
-    body('retailer', 'Invalid retailer').isString().notEmpty().matches("^\\S+$"),
+    body('retailer', 'Invalid retailer').isString().notEmpty(),
     body('purchaseDate', 'Invalid purchase date').isISO8601(),
     body('purchaseTime', 'Invalid purchase time').isTime(),
     body('items', 'No items in receipt').notEmpty(),
-    body('total', 'Invalid total amount').isString().notEmpty().matches("^\\d+\\.\\d{2}$"),
+    body('total', 'Invalid total amount').isString().notEmpty(),
     body().custom(body => {
         const validKeys = ['retailer', 'purchaseDate', 'purchaseTime', 'items', 'total'];
         return Object.keys(body).every(key => validKeys.includes(key))
