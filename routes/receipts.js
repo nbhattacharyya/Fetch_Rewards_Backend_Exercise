@@ -4,9 +4,12 @@ const helperFunctions = require('../utils/helper.js');
 const express = require('express');
 const router = express.Router();
 
-let receiptsPointsMap = {};
+// Map to gold key:value pair of id:points
+const receiptsPointsMap = {};
 
+// Post request for '/receipts/process'
 router.post('/', [
+    // Reqeust body validations and error handling
     body('retailer', 'Invalid retailer').isString().notEmpty().matches("^\\S+$"),
     body('purchaseDate', 'Invalid purchase date').isISO8601(),
     body('purchaseTime', 'Invalid purchase time').isTime(),
@@ -22,7 +25,11 @@ router.post('/', [
         return res.status(400).send(validationErrors.array());
         next();
     }
+
+    // Variable to keep track of total points for this receipt
     let totalPoints = 0;
+
+    // Each helper function takes care of points calculation based on each individual rule
     totalPoints += (helperFunctions.namePoints(req.body.retailer)
         + helperFunctions.totalAmountPoints(req.body.total)
         + helperFunctions.dayPurchasePoints(req.body.purchaseDate)
@@ -30,6 +37,8 @@ router.post('/', [
         + helperFunctions.itemDescriptions(req.body.items)
         + helperFunctions.itemsLengthPoints(req.body.items));
     let id = helperFunctions.generateId();
+
+    // Make sure the generated Id is not already in memory
     while (id in receiptsPointsMap) {
         id = helperFunctions.generateId();
     }
@@ -37,10 +46,12 @@ router.post('/', [
     res.status(200).json({ success: "receipt processed", id: id });
 });
 
+// Get request for '/receipts/{id}/points'
 router.get('/', (req, res) => {
     let id = req.baseUrl.split('/')[2];
     if (!Object.keys(receiptsPointsMap).includes(id)) {
-        res.status(404).send('No recepit found for that id');
+        return res.status(404).send('No receipt found for that id');
+        next();
     }
     let points = receiptsPointsMap[id];
     res.send({points: points});

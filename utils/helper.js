@@ -1,4 +1,11 @@
+// Valid characters for the generated Id
 const charSet = '0123456789abcdefghijklmnopqrstuvwxyz';
+
+// Generating 2 PM and 4 PM in DateTime format for rule for time of purchase
+const twoPm = new Date();
+const fourPm = new Date();
+twoPm.setHours(14, 0);
+fourPm.setHours(16, 0);
 
 const namePoints = (retailer) => {
     let count = 0;
@@ -16,10 +23,8 @@ exports.totalAmountPoints = (total) => {
     if (num === 0) {
         return 75;
     }
-    else {
-        if (num % 0.25 == 0) {
-            return 25;
-        }
+    else if (num % 0.25 == 0) {
+        return 25;
     }
     return 0;
 };
@@ -37,10 +42,6 @@ exports.dayPurchasePoints = (purchaseDate) => {
 }
 
 exports.purchaseTimePoints = (purchaseTime) => {
-    var twoPm = new Date();
-    var fourPm = new Date();
-    twoPm.setHours(14, 0);
-    fourPm.setHours(16, 0);
     var purchaseTimeConverted = new Date();
     let parts = purchaseTime.split(':');
     purchaseTimeConverted.setHours(parts[0], parts[1]);
@@ -64,7 +65,6 @@ exports.itemDescriptions = (items) => {
 
 exports.generateId = () => {
     let result = '';
-    let counter = 0;
     for (let i = 0; i < 36; i++) {
         if (i === 8 || i === 13 || i === 18 || i === 23) {
             result += '-'
